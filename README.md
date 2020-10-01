@@ -2,7 +2,24 @@
 Way to install NVIDIA driver on Linux
 # Disable Nouveau driver and X Server
 
-## Disable nouveau by blacklisting it
+# Dependencies
+C basic build tool
+```
+dnf install gcc make pkgconfig
+```
+Kernel development tool
+you need to see kernel headers match your kernel release `uname -r`
+```
+dnf install kernel-devel kernel-headers dkms acpid
+```
+NVidia `glvnd` library \
+The name come from "GL Vendor-Neutral Dispatch library"
+```
+sudo dnf install libglvnd-glx libglvnd-opengl libglvnd-devel 
+```
+
+
+## Disable nouveau in module loader
 ```
 echo blacklist nouveau > /etc/modprobe.d/nouveau.conf
 ```
@@ -15,7 +32,7 @@ Grub need a compile to generate the new config file
 ```
 grub2-mkconfig -o /boot/efi/EFI/grub.conf
 ```
-## new initramfs
+## New initramfs
 ```
 cd /boot
 dracut --force
@@ -41,7 +58,7 @@ For other run level,
 ```
 ## Set run level 5
 ```
-systemd set-default graphic.target
+systemd set-default graphical.target
 ```
 ## Reboot
 ```
