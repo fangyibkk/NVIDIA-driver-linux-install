@@ -29,6 +29,11 @@ echo blacklist nouveau > /etc/modprobe.d/nouveau.conf
 GRUB_LINUX_COMMAND="... rhgb silent ... rb.driver.blacklist=nouveau"
 ```
 Grub need a compile to generate the new config file
+For BIOS, MBR
+```
+grub2-mkconfig -o /boot/grub2/grub.cfg
+```
+For EFI
 ```
 grub2-mkconfig -o /boot/efi/EFI/grub.conf
 ```
@@ -41,7 +46,7 @@ dracut --force
 ## Set run level 3
 At run level 3, it has network and multiuser.
 ```
-systemd set-default multi-user.target
+systemctl set-default multi-user.target
 ```
 For other run level,
 - 0 = poweroff
@@ -58,7 +63,7 @@ For other run level,
 ```
 ## Set run level 5
 ```
-systemd set-default graphical.target
+systemctl set-default graphical.target
 ```
 ## Reboot
 ```
