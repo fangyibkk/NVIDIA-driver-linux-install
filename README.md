@@ -25,6 +25,9 @@ echo blacklist nouveau > /etc/modprobe.d/nouveau.conf
 ```
 
 ## Disable nouveau in GRUB
+Edit GRUB config in `/etc/sysconfig/grub` \
+for default Fedora already has Linux command ending in `... rhgb quiet` \
+So just add blacklist as another extra argument
 ```
 GRUB_LINUX_COMMAND="... rhgb silent ... rb.driver.blacklist=nouveau"
 ```
